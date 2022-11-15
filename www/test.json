@@ -1,0 +1,67 @@
+{
+  "name": "Benefit Risk",
+  "_parents": [
+    {
+      "name": "Risks",
+      "_parents": [
+        {
+          "name": "Risk category 1",
+          "_parents": [
+            {
+              "name": "Principal safety outcome"
+            }
+           
+          ]
+        },
+		{
+			"name": "Risk category 2",
+			"_parents":[
+				{
+					"name": "Adverse event 1"
+				},
+				{
+					"name": "Adverse event 2"
+				},
+				{
+					"name": "Adverse event 3"
+				}
+			]
+		},
+		{
+			"name": "Risk category 3"
+		}
+      ]
+    },
+
+	{
+		"name": "Benefits",
+		"_parents":[
+			{
+				"name": "Benefit category 1",
+				"_parents":[
+					{
+						"name": "Primary efficacy outcome"
+					},
+					{
+						"name": "Secondary efficafy outcome"
+					}
+				]
+
+			},
+			{
+				"name": "Benefit category 2",
+				"_parents":[
+					{
+						"name": "Tertiary efficacy outcome"
+					}
+				]
+			},
+			{
+				"name": "Benefit category 3"
+			}
+
+		]
+	}
+
+  ]
+}

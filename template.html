@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- template.html -->
+<html>
+  <head>
+    {{ headContent() }}
+  </head>
+  <body>
+	<div>
+		{{d3}}
+		{{shiny_app}}
+		{{dnd}}
+		{{d3_context}}
+		{{jq}}
+		{{under_score}}
+		{{fast_click}}
+		{{foundation}}
+		{{d3_css}}
+		{{foundation_css}}
+		{{app_css}}
+		
+
+	</div>
+	<h4>Value Tree</h4>
+	<div id="RenameNodeModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+	  <h2 id="modalTitle">Rename Node</h2>
+	  <form id="RenameNodeForm">
+		<div class="row">
+		  <div class="large-12 columns">
+			<label>Node name
+			  <input type="text" class="inputName" id='RenameNodeName' placeholder="node name" />
+			</label>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="large-8 columns">
+			&nbsp;
+		  </div>
+		  <div class="large-4 columns">
+			<a href="#" class="button info" onclick="close_rename_node_modal()">Cancel</a>
+			<a href="#" class="button success" onclick="rename_node()">Rename</a>
+		  </div>
+		</div>
+	  </form>
+	  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	</div>
+
+	<div id="CreateNodeModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+	  <h2 id="modalTitle">Create Node</h2>
+	  <form id="CreateNodeForm">
+		<div class="row">
+		  <div class="large-12 columns">
+			<label>Node name
+			  <input type="text" class="inputName" id='CreateNodeName' placeholder="node name" />
+			</label>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="large-8 columns">
+			&nbsp;
+		  </div>
+		  <div class="large-4 columns">
+			<a href="#" class="button info" onclick="close_create_node_modal()">Cancel</a>
+			<a href="#" class="button success" onclick="create_node()">Create</a>
+		  </div>
+		</div>
+	  </form>
+	  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	</div>
+
+	<div id="tree-container"></div>
+
+</body>
+</html>
