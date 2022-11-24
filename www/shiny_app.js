@@ -638,7 +638,10 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
 						source: o,
 						target: o
 					});
-				});
+				})
+                .style("fill", "none")
+                .style("stroke", "#ccc")
+                .style("stroke-width", "1.5px");
 	
 			// Transition links to their new position.
 			// link.transition()
