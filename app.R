@@ -1,43 +1,33 @@
-# Define server logic for random distribution app ----
-server <- function(input, output) {
+## ui.R ##
+ui <- htmlTemplate("template.html",
+    button = actionButton("action", "Action"),
+    slider = sliderInput("x", "X", 1, 100, 50),
+    d3 = htmltools::includeScript("www/d3.v3.min.js"),
+    shiny_app = htmltools::includeScript("www/shiny_app.js"),
+    dnd = htmltools::includeScript("www/dndTree.js"),
+    d3_context = htmltools::includeScript("www/d3-context-menu.js"),
+    under_score = htmltools::includeScript("www/underscore-min.js"),
+    jq = htmltools::includeScript("www/jquery.js"),
+    fast_click = htmltools::includeScript("www/fastclick.js"),
+    foundation = htmltools::includeScript("www/foundation.min.js"),
+    d3_css = htmltools::includeCSS("www/d3-context-menu.css"),
+    foundation_css = htmltools::includeCSS("www/foundation.css"),
+    app_css = htmltools::includeCSS("www/app.css"),
+)
 
-  # Reactive expression to generate the requested distribution ----
-  # This is called whenever the inputs change. The output functions
-  # defined below then use the value computed from this expression
-  d <- reactive({
-    dist <- switch(input$dist,
-                   norm = rnorm,
-                   unif = runif,
-                   lnorm = rlnorm,
-                   exp = rexp,
-                   rnorm)
+server  <- function(input, output, session) {
 
-    dist(input$n)
-  })
+	js_data <- shiny::reactive({
+		json_data <- jsonlite::fromJSON("www/benefit.json")
+		to_json <- jsonlite::toJSON(json_data)
+		# print(to_json)
+		to_json
+	})
 
-  # Generate a plot of the data ----
-  # Also uses the inputs to build the plot label. Note that the
-  # dependencies on the inputs and the data reactive expression are
-  # both tracked, and all expressions are called in the sequence
-  # implied by the dependency graph.
-  output$plot <- renderPlot({
-    dist <- input$dist
-    n <- input$n
-
-    hist(d(),
-         main = paste("r", dist, "(", n, ")", sep = ""),
-         col = "#007bc2", border = "white")
-  })
-
-  # Generate a summary of the data ----
-  output$summary <- renderPrint({
-    summary(d())
-  })
-
-  # Generate an HTML table view of the head of the data ----
-  output$table <- renderTable({
-    head(data.frame(x = d()))
-  })
+	shiny::observe({
+		session$sendCustomMessage("json_data", js_data())
+	})
 
 }
-shinyApp(ui = htmlTemplate("index.html"), server)
+
+shiny::shinyApp(ui,server)
