@@ -527,7 +527,11 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
 			  y: -(boxHeight/2),
 			  width: boxWidth,
 			  height: boxHeight
-			});
+            //   fill: white
+			})
+            .style("fill", "white")
+            .style("stroke", "steelblue")
+            .style("stroke-width", "1px");
 	
 			nodeEnter.append("text")
 				.attr("x", function(d) {
@@ -541,7 +545,12 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
 				.text(function(d) {
 					return d.name;
 				})
-				.style("fill-opacity", 0);
+				.style("fill-opacity", 0)
+				.style("font-size", "10px")
+				.style("font-family", "sans-serif")
+				.style("dominant-baseline", "middle")
+				.style("text-anchor", "middle")
+                ;
 	
 				// d3.selectAll("text").each(function (d, i) {
 				// 	d3plus.textwrap()
@@ -557,6 +566,7 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
 				.attr("opacity", 0.2) // change this to zero to hide the target area
 			.style("fill", "red")
 				.attr('pointer-events', 'mouseover')
+                .style("fill", "white")
 				.on("mouseover", function(node) {
 					overCircle(node);
 				})

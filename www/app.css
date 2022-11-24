@@ -2,9 +2,9 @@
   cursor: pointer;
 } */
 .node rect {
-	fill: #fff;
-	stroke: steelblue;
-	stroke-width: 1px;
+	/* fill: #fff; */
+	/* stroke: steelblue;
+	stroke-width: 1px; */
   }
 .overlay{
     background-color:#EEE;
@@ -16,10 +16,10 @@
   stroke-width: 1.5px;
 }
  
-.node text {
+/* .node text {
   font-size:10px; 
   font-family:sans-serif;
-}
+} */
  
 .link {
   fill: none;
@@ -45,8 +45,8 @@
         display: none;
 }
 
-text {
+/* text {
 	dominant-baseline: middle;
 	text-anchor: middle;
-}
+} */
 

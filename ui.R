@@ -1,7 +1,10 @@
 ## ui.R ##
 library(shiny)
+options(shiny.autoreload = TRUE)
+
 ui <- htmlTemplate("template.html",
-    button = actionButton("down_button", "Download"),
+    button = actionButton("down_button", "Download PNG"),
+    button_svg = actionButton("down_button_svg", "Download SVG"),
     slider = sliderInput("x", "X", 1, 100, 50),
     d3 = htmltools::includeScript("www/d3.v3.min.js"),
     shiny_app = htmltools::includeScript("www/shiny_app.js"),
@@ -34,7 +37,11 @@ server  <- function(input, output, session) {
 
     shiny::observe({
         req(input$down_button)
-        session$sendCustomMessage("down_tree", input$down_button)
+        session$sendCustomMessage("down_tree_png", input$down_button)
+    })
+    shiny::observe({
+        req(input$down_button_svg)
+        session$sendCustomMessage("down_tree_svg", input$down_button_svg)
     })
 
 }

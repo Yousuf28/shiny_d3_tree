@@ -1,6 +1,6 @@
 // var btn = document.querySelector('down_button')
 
-Shiny.addCustomMessageHandler("down_tree", function(message){
+Shiny.addCustomMessageHandler("down_tree_png", function(message){
 
 //     var svg_tree = document.querySelector('svg')
 
@@ -25,7 +25,7 @@ Shiny.addCustomMessageHandler("down_tree", function(message){
 
 // save()
 
-var width = 500, height = 500;
+var width = 1000, height = 1000;
 
 
 // Below are the functions that handle actual exporting:
@@ -139,3 +139,33 @@ function save( dataBlob, filesize ){
     
 })
 
+// svg
+Shiny.addCustomMessageHandler("down_tree_svg", function(message){
+
+        var svg_tree = document.querySelector('svg')
+    
+    let triggerDownload = (imgURI, fileName) => {
+        let a = document.createElement('a')
+    
+        a.setAttribute('download', 'image.svg')
+        a.setAttribute('href', imgURI)
+        a.setAttribute('target', '_blank')
+    
+        a.click()
+    }
+    
+    let save = () => {
+        let data = (new XMLSerializer()).serializeToString(svg_tree)
+        let svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'})
+        let url = URL.createObjectURL(svgBlob)
+    
+        triggerDownload(url)
+    }
+    
+    
+    save()
+    
+    
+        
+    })
+    
