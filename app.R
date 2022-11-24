@@ -15,19 +15,17 @@ ui <- htmlTemplate("template.html",
     app_css = htmltools::includeCSS("www/app.css"),
 )
 
-server  <- function(input, output, session) {
+server <- function(input, output, session) {
+    js_data <- shiny::reactive({
+        json_data <- jsonlite::fromJSON("www/benefit.json")
+        to_json <- jsonlite::toJSON(json_data)
+        # print(to_json)
+        to_json
+    })
 
-	js_data <- shiny::reactive({
-		json_data <- jsonlite::fromJSON("www/benefit.json")
-		to_json <- jsonlite::toJSON(json_data)
-		# print(to_json)
-		to_json
-	})
-
-	shiny::observe({
-		session$sendCustomMessage("json_data", js_data())
-	})
-
+    shiny::observe({
+        session$sendCustomMessage("json_data", js_data())
+    })
 }
 
 shiny::shinyApp(ui,server)
