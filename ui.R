@@ -1,6 +1,6 @@
 ## ui.R ##
 library(shiny)
-options(shiny.autoreload = TRUE)
+
 
 ui <- htmlTemplate("template.html",
     button = actionButton("down_button", "Download PNG"),
