@@ -169,3 +169,18 @@ Shiny.addCustomMessageHandler("down_tree_svg", function(message){
         
     })
     
+    Shiny.addCustomMessageHandler("node_text", function(data){
+        // let data = data;
+        
+        let node_text = document.getElementsByClassName("nodeText");
+      
+        let all_text = []
+        for (let i = 0; i < node_text.length; i++) {
+            all_text[i] = node_text[i].innerHTML
+            
+        }
+        // console.log(all_text)
+         Shiny.setInputValue("current_node_text", all_text, {priority : "event"})
+        
+        }
+        )

@@ -29,3 +29,16 @@ function getName(tree_root){
 
 
 }
+
+// Shiny.addCustomMessageHandler("down_tree_svg", function(data){
+// let data = data;
+// let node_text = document.getElementsByClassName("nodeText");
+// let all_text = []
+// for (let i = 0; i < node_text.length; i++) {
+//     all_text[i] = node_text[i].innerHTML
+    
+// }
+//  Shiny.setInputValue("current_node_text", all_text, {priority : "event"})
+
+// }
+// )

@@ -5,7 +5,9 @@ library(shiny)
 ui <- htmlTemplate("template.html",
     button = actionButton("down_button", "Download PNG"),
     button_svg = actionButton("down_button_svg", "Download SVG"),
+    get_text = actionButton("get_node_text", "print node text"),
     slider = sliderInput("x", "X", 1, 100, 50),
+    all_text = verbatimTextOutput("disp_node_text"),
     d3 = htmltools::includeScript("www/d3.v3.min.js"),
     shiny_app = htmltools::includeScript("www/shiny_app.js"),
     dnd = htmltools::includeScript("www/dndTree.js"),
@@ -61,6 +63,21 @@ server  <- function(input, output, session) {
         # saveRDS(tree, "file_tree.rds")
         print(input$current_tree)
        
+    })
+
+       shiny::observe({
+        req(input$get_node_text)
+        session$sendCustomMessage("node_text", input$get_node_text)
+    })
+
+    shiny::observeEvent(input$get_node_text, {
+        # req(input$current_node_text)
+        print(input$current_node_text)
+        
+    })
+    output$disp_node_text <- shiny::renderPrint({
+        req(input$current_node_text)
+        input$current_node_text
     })
 
 }

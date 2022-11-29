@@ -25,11 +25,11 @@ $('document').ready(function () {
 
 });
 
-Shiny.addCustomMessageHandler("json_data_print", function (message) {
+// Shiny.addCustomMessageHandler("json_data_print", function (message) {
 	
-	var treeData = message.data;
-	console.log(treeData)
-})
+// 	var treeData = message.data;
+// 	console.log(treeData)
+// })
 
 
 
@@ -702,8 +702,9 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
         // const to_shiny_obj = Flatted.stringify(tree_root)
         // console.log(to_shiny_obj)
 		// console.log(treeData);
+        // console.log(tree_root)
 	
-        Shiny.setInputValue("current_tree", "data", {priority : "event"})
+        // Shiny.setInputValue("current_tree", "data", {priority : "event"})
 
 });
 
