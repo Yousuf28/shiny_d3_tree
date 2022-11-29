@@ -17,6 +17,7 @@ ui <- htmlTemplate("template.html",
     download_svg = htmltools::includeScript("www/svgDownload.js"),
     file_saver = htmltools::includeScript("www/FileSaver.js"),
     canvas_js = htmltools::includeScript("www/canvas-to-blob.js"),
+    flatted_js = htmltools::includeScript("www/flatted.min.js"),
     d3_css = htmltools::includeCSS("www/d3-context-menu.css"),
     foundation_css = htmltools::includeCSS("www/foundation.css"),
     app_css = htmltools::includeCSS("www/app.css"),
@@ -27,12 +28,22 @@ server  <- function(input, output, session) {
 	js_data <- shiny::reactive({
 		json_data <- jsonlite::fromJSON("www/benefit.json")
 		to_json <- jsonlite::toJSON(json_data)
+        to_json
 		# print(to_json)
-		to_json
+		
 	})
+    info <- reactive({
+        data <- js_data()
+        click_ac <- input$down_button_svg
+        send_info <- list(data=data, info=click_ac)
+        send_info
+    })
 
 	shiny::observe({
-		session$sendCustomMessage("json_data", js_data())
+		session$sendCustomMessage("json_data", info())
+	})
+	shiny::observe({
+		session$sendCustomMessage("json_data_print", js_data())
 	})
 
     shiny::observe({
@@ -42,6 +53,14 @@ server  <- function(input, output, session) {
     shiny::observe({
         req(input$down_button_svg)
         session$sendCustomMessage("down_tree_svg", input$down_button_svg)
+    })
+
+    observeEvent(input$down_button_svg,{
+        req(input$current_tree)
+        # tree <- jsonlite::fromJSON(input$current_tree)
+        # saveRDS(tree, "file_tree.rds")
+        print(input$current_tree)
+       
     })
 
 }

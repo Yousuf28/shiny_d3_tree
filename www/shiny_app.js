@@ -1,4 +1,6 @@
 
+
+
 			// for the first initialization
 $('document').ready(function () {
 	$(document).foundation();
@@ -23,17 +25,25 @@ $('document').ready(function () {
 
 });
 
+Shiny.addCustomMessageHandler("json_data_print", function (message) {
+	
+	var treeData = message.data;
+	console.log(treeData)
+})
+
 
 
 Shiny.addCustomMessageHandler("json_data", function (message) {
 	
-	var treeData = message;
-	// console.log(data)
+	var treeData = message.data;
+	var info_svg = message.info;
+	console.log(treeData)
+	console.log(info_svg)
 	// d3.call(draw_tree)
 	 
 	// draw_tree(data)
 	
-		console.log(treeData)
+		// console.log(treeData)
 		var boxWidth = 200,
 			boxHeight = 40;
 	
@@ -689,9 +699,11 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
 		update(root);
 		centerNode(root);
 		tree_root = root;
-		console.log(tree_root);
+        // const to_shiny_obj = Flatted.stringify(tree_root)
+        // console.log(to_shiny_obj)
+		// console.log(treeData);
 	
-	
+        Shiny.setInputValue("current_tree", "data", {priority : "event"})
 
 });
 
