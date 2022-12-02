@@ -37,7 +37,7 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
 	
 	var treeData = message.data;
 	var info_svg = message.info;
-	console.log(treeData)
+	// console.log(treeData)
 	console.log(info_svg)
 	// d3.call(draw_tree)
 	 
@@ -159,6 +159,7 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
 						   for (var child of d.children) {
 								   if (child == node) {
 										   d.children = _.without(d.children, child);
+                                        //    console.log(d.children)
 										   update(root);
 										   break;
 								   }
@@ -167,6 +168,7 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
 			},
 			function(d) {
 			   return d.children && d.children.length > 0 ? d.children : null;
+              
 		   });
 		}
 	
@@ -479,6 +481,7 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
 		}
 	
 		function update(source) {
+            // console.log(source)
 			// Compute the new height, function counts total children of root node and sets tree height accordingly.
 			// This prevents the layout looking squashed when new nodes are made visible or looking sparse when nodes are removed
 			// This makes the layout more consistent.
@@ -696,13 +699,15 @@ Shiny.addCustomMessageHandler("json_data", function (message) {
 		root.y0 = 0;
 	
 		// Layout the tree initially and center on the root node.
+        // var update_tree = update(root)
+        // console.log(update_tree)
 		update(root);
 		centerNode(root);
 		tree_root = root;
         // const to_shiny_obj = Flatted.stringify(tree_root)
         // console.log(to_shiny_obj)
 		// console.log(treeData);
-        // console.log(tree_root)
+        console.log(tree_root)
 	
         // Shiny.setInputValue("current_tree", "data", {priority : "event"})
 

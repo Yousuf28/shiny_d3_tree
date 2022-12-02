@@ -1,7 +1,8 @@
 
 // let tree = tree_root.children;
-
+var all_nodes = [];
 function getName(tree_root){
+    
     if(tree_root.children){
 
         let tree = tree_root.children;
@@ -15,6 +16,7 @@ function getName(tree_root){
               
               
                   console.log(element.name)
+                  all_nodes.push(element.name)
                   getName(element)
       
               
@@ -25,10 +27,13 @@ function getName(tree_root){
       }
         
     }
+
    
 
 
 }
+
+
 
 // Shiny.addCustomMessageHandler("down_tree_svg", function(data){
 // let data = data;

@@ -3,6 +3,8 @@ library(shiny)
 
 
 ui <- htmlTemplate("template.html",
+    upload_json = shiny::fileInput("json_file", label = "Upload json file", accept = c(".json")),
+    create_tree = shiny::actionButton("create_tree", "Create Tree"),
     button = actionButton("down_button", "Download PNG"),
     button_svg = actionButton("down_button_svg", "Download SVG"),
     get_text = actionButton("get_node_text", "print node text"),
@@ -27,8 +29,10 @@ ui <- htmlTemplate("template.html",
 
 server  <- function(input, output, session) {
 
-	js_data <- shiny::reactive({
-		json_data <- jsonlite::fromJSON("www/benefit.json")
+	js_data <- shiny::eventReactive(input$create_tree,{
+        req(input$json_file)
+        file <- input$json_file$datapath
+		json_data <- jsonlite::fromJSON(file)
 		to_json <- jsonlite::toJSON(json_data)
         to_json
 		# print(to_json)
